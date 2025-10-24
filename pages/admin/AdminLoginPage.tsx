@@ -51,7 +51,6 @@ const AdminLoginPage: React.FC = () => {
           <Button type="submit" className="w-full">
             Log In
           </Button>
-          <p className="text-xs text-center text-gray-500 dark:text-gray-400">Hint: Use 'admin123'</p>
         </form>
       </div>
     </div>
