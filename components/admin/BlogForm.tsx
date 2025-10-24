@@ -41,11 +41,17 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onClose }) => {
         imageUrl: post?.imageUrl || '',
         author: post?.author || '',
         publishDate: post?.publishDate || new Date().toISOString().split('T')[0],
+        metaDescription: post?.metaDescription || '',
+        metaKeywords: post?.metaKeywords || [],
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        if (name === 'metaKeywords') {
+            setFormData(prev => ({ ...prev, [name]: value.split(',').map(s => s.trim()) }));
+        } else {
+            setFormData(prev => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,6 +107,17 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onClose }) => {
                         <div>
                             <Label htmlFor="content">Content (HTML allowed)</Label>
                             <Textarea id="content" name="content" value={formData.content} onChange={handleChange} rows={10} required />
+                        </div>
+                        <div className="border-t pt-4 mt-4 dark:border-gray-600">
+                             <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">SEO Settings</h3>
+                             <div>
+                                <Label htmlFor="metaDescription">Meta Description</Label>
+                                <Textarea id="metaDescription" name="metaDescription" value={formData.metaDescription} onChange={handleChange} rows={2} placeholder="A concise summary for search engines (approx. 160 characters)." />
+                            </div>
+                             <div className="mt-4">
+                                <Label htmlFor="metaKeywords">Meta Keywords (comma-separated)</Label>
+                                <Input id="metaKeywords" name="metaKeywords" value={Array.isArray(formData.metaKeywords) ? formData.metaKeywords.join(', ') : ''} onChange={handleChange} placeholder="e.g., keyword1, keyword2, keyword3" />
+                            </div>
                         </div>
                         <div>
                             <Label htmlFor="imageUrl">Image</Label>

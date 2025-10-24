@@ -42,6 +42,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onClose }) => {
         category: product?.category || '',
         applications: product?.applications || [],
         materials: product?.materials || [],
+        specifications: product ? Object.entries(product.specifications).map(([k,v]) => `${k}: ${v}`).join('\n') : '',
+        specSheetUrl: product?.specSheetUrl || '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -83,16 +85,29 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onClose }) => {
             return;
         }
         
-        const finalData = {
-          ...formData,
-          applications: Array.isArray(formData.applications) ? formData.applications : formData.applications.split(',').map(s => s.trim()),
-          materials: Array.isArray(formData.materials) ? formData.materials : formData.materials.split(',').map(s => s.trim()),
+        const specificationsObject = formData.specifications
+            .split('\n')
+            .filter(line => line.includes(':'))
+            .reduce((acc, line) => {
+                const [key, ...valueParts] = line.split(':');
+                const value = valueParts.join(':').trim();
+                if (key.trim() && value) {
+                    acc[key.trim()] = value;
+                }
+                return acc;
+            }, {} as { [key: string]: string });
+
+        const { specifications, ...restOfData } = formData;
+
+        const finalProductData = {
+            ...restOfData,
+            specifications: specificationsObject
         };
 
         if (product) {
-            updateProduct({ ...product, ...finalData });
+            updateProduct({ ...product, ...finalProductData });
         } else {
-            addProduct(finalData);
+            addProduct(finalProductData);
         }
         onClose();
     };
@@ -152,6 +167,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onClose }) => {
                         <div>
                             <Label htmlFor="materials">Materials (comma-separated)</Label>
                             <Input id="materials" name="materials" value={Array.isArray(formData.materials) ? formData.materials.join(', ') : formData.materials} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <Label htmlFor="specifications">Specifications (one per line, e.g., "Power: 2.2kW")</Label>
+                            <Textarea id="specifications" name="specifications" value={formData.specifications} onChange={handleChange} rows={5} />
+                        </div>
+                        <div>
+                            <Label htmlFor="specSheetUrl">Spec Sheet URL (e.g., /docs/sheet.pdf)</Label>
+                            <Input id="specSheetUrl" name="specSheetUrl" value={formData.specSheetUrl} onChange={handleChange} />
                         </div>
                         <div className="flex justify-end space-x-4 pt-4">
                             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

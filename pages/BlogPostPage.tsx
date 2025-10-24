@@ -11,6 +11,33 @@ const BlogPostPage: React.FC = () => {
   const { blogPosts } = useAdmin();
   const post = blogPosts.find(p => p.slug === slug);
 
+  React.useEffect(() => {
+    if (post) {
+      // Set the page title
+      const originalTitle = document.title;
+      document.title = `${post.title} | KamiluWelding`;
+
+      // Create and append meta description
+      const metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      metaDescription.content = post.metaDescription;
+      document.head.appendChild(metaDescription);
+
+      // Create and append meta keywords
+      const metaKeywords = document.createElement('meta');
+      metaKeywords.name = 'keywords';
+      metaKeywords.content = post.metaKeywords.join(', ');
+      document.head.appendChild(metaKeywords);
+
+      // Cleanup function to remove meta tags and restore title on unmount
+      return () => {
+        document.title = originalTitle;
+        document.head.removeChild(metaDescription);
+        document.head.removeChild(metaKeywords);
+      };
+    }
+  }, [post]);
+
   if (!post) {
     return (
       <AnimatedPage>

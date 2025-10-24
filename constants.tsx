@@ -23,6 +23,13 @@ export const PRODUCTS: Product[] = [
         category: 'Stainless Steel Equipment',
         applications: ['Food Processing', 'Apiculture', 'Commercial Honey Production'],
         materials: ['304 Stainless Steel', 'Food-Grade Seals'],
+        specifications: {
+            'Capacity': '100 Liters/Batch',
+            'Power': '2.2 kW, 220V/50Hz',
+            'Dimensions (LxWxH)': '1200 x 800 x 1500 mm',
+            'Weight': '150 kg'
+        },
+        specSheetUrl: '/docs/honey-processor-spec-sheet.pdf',
     },
     {
         id: 2,
@@ -34,6 +41,13 @@ export const PRODUCTS: Product[] = [
         category: 'Agro-Allied Machinery',
         applications: ['Farming Cooperatives', 'Large-Scale Farms', 'Post-Harvest Processing'],
         materials: ['Mild Steel Frame', 'High-Carbon Steel Components'],
+        specifications: {
+            'Throughput': '500-800 kg/hour (Maize)',
+            'Power Source': '15 HP Petrol Engine or Electric Motor',
+            'Weight': '250 kg',
+            'Crops': 'Maize, Millet, Sorghum, Beans'
+        },
+        specSheetUrl: '/docs/multi-crop-thresher-spec-sheet.pdf',
     },
     {
         id: 3,
@@ -45,6 +59,13 @@ export const PRODUCTS: Product[] = [
         category: 'Agro-Allied Machinery',
         applications: ['Poultry Farming', 'Aquaculture', 'Livestock Management', 'Commercial Feed Production'],
         materials: ['Structural Steel', 'Stainless Steel Contact Parts'],
+        specifications: {
+            'Capacity': '250 kg/hour',
+            'Motor Power': '10 kW (Mixer), 15 kW (Pelletizer)',
+            'Pellet Size': '2mm - 8mm (Customizable)',
+            'System': 'Grinder, Mixer, Pelletizer'
+        },
+        specSheetUrl: '/docs/animal-feed-mill-spec-sheet.pdf',
     },
     {
         id: 4,
@@ -56,6 +77,13 @@ export const PRODUCTS: Product[] = [
         category: 'Industrial Equipment',
         applications: ['Textile Industry', 'Food & Beverage', 'Pharmaceuticals', 'Laundries'],
         materials: ['Boiler Steel', 'Carbon Steel', 'Refractory Materials'],
+        specifications: {
+            'Capacity': '500 L to 5000 L',
+            'Working Pressure': 'Up to 10 Bar',
+            'Fuel Type': 'Diesel, Gas, Firewood',
+            'Efficiency': '> 85%'
+        },
+        specSheetUrl: '/docs/industrial-boiler-spec-sheet.pdf',
     },
     {
         id: 5,
@@ -67,6 +95,13 @@ export const PRODUCTS: Product[] = [
         category: 'Agro-Allied Machinery',
         applications: ['Food Processing', 'Agro-business', 'Herbal Medicine'],
         materials: ['Stainless Steel (Food Grade)', 'Insulated Panels'],
+        specifications: {
+            'Tray Count': '20-100 Trays',
+            'Temperature Range': '40°C - 90°C',
+            'Power': '3 kW - 15 kW',
+            'Control': 'Digital Thermostat Control'
+        },
+        specSheetUrl: '/docs/vegetable-dryer-spec-sheet.pdf',
     },
     {
         id: 6,
@@ -78,6 +113,13 @@ export const PRODUCTS: Product[] = [
         category: 'Industrial Equipment',
         applications: ['Food Storage', 'Pharmaceuticals', 'Logistics', 'Supermarkets'],
         materials: ['Polyurethane Panels', 'Stainless Steel Cladding', 'Refrigeration Components'],
+        specifications: {
+            'Size': 'Customizable (e.g., 10ft x 10ft x 8ft)',
+            'Temperature Range': '-20°C to +10°C',
+            'Compressor': 'Copeland / Bitzer',
+            'Panel Thickness': '100mm / 150mm'
+        },
+        specSheetUrl: '/docs/cold-room-spec-sheet.pdf',
     },
 ];
 
@@ -99,6 +141,8 @@ export const BLOG_POSTS: BlogPost[] = [
         imageUrl: 'https://picsum.photos/seed/stainless-steel-food/800/600',
         author: 'Dr. Aliu Yamah',
         publishDate: 'March 15, 2024',
+        metaDescription: 'Learn why 304 and 316 stainless steel are the top materials for food processing equipment. Discover the benefits of hygiene, corrosion resistance, and durability with Kamilu Welding Services.',
+        metaKeywords: ['stainless steel', 'food processing', 'hygiene', 'fabrication', 'Kano', 'Nigeria', 'industrial machinery'],
     },
     {
         id: 2,
@@ -109,6 +153,8 @@ export const BLOG_POSTS: BlogPost[] = [
         imageUrl: 'https://picsum.photos/seed/agro-innovation/800/600',
         author: 'Abubakar S Abdullahi',
         publishDate: 'February 28, 2024',
+        metaDescription: 'Explore modern agro-allied machinery from Kamilu Welding Services. Our multi-crop threshers and feed mills are designed to increase agricultural productivity and efficiency in Nigeria.',
+        metaKeywords: ['agro-allied machinery', 'farming', 'agriculture', 'multi-crop thresher', 'feed mill', 'Nigeria'],
     },
     {
         id: 3,
@@ -119,6 +165,8 @@ export const BLOG_POSTS: BlogPost[] = [
         imageUrl: 'https://picsum.photos/seed/welding-training/800/600',
         author: 'Muhammad Hamza',
         publishDate: 'January 10, 2024',
+        metaDescription: 'Kamilu Welding Services is committed to youth empowerment through skills acquisition programs in welding and fabrication, in partnership with NBTI Kano.',
+        metaKeywords: ['youth training', 'skills acquisition', 'welding', 'fabrication', 'empowerment', 'NBTI', 'Kano'],
     },
 ];
 

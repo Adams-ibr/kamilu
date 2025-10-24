@@ -10,6 +10,7 @@ import InquiryPopup from '../components/InquiryPopup';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ProductCard from '../components/ProductCard';
 import SectionTitle from '../components/SectionTitle';
+import { DownloadIcon } from '../components/icons';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -51,6 +52,10 @@ const ProductDetailPage: React.FC = () => {
       </AnimatedPage>
     );
   }
+  
+  const buttonBaseClasses = "px-6 py-3 font-bold rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-gray-900";
+  const buttonOutlineClasses = "bg-transparent border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white focus:ring-brand-blue dark:text-brand-gold dark:border-brand-gold dark:hover:bg-brand-gold dark:hover:text-brand-charcoal";
+  const buttonCommonClasses = "w-full text-lg flex items-center justify-center gap-2";
 
   return (
     <AnimatedPage>
@@ -101,6 +106,18 @@ const ProductDetailPage: React.FC = () => {
               </div>
 
               <div className="border-t dark:border-gray-700 pt-6 mt-6">
+                <h3 className="text-xl font-semibold text-brand-blue dark:text-gray-200 mb-4">Technical Specifications</h3>
+                <dl className="space-y-3 text-gray-700 dark:text-gray-300">
+                    {Object.entries(product.specifications).map(([key, value]) => (
+                        <div key={key} className="flex justify-between border-b dark:border-gray-700 pb-2">
+                            <dt className="font-medium text-gray-800 dark:text-gray-200">{key}</dt>
+                            <dd className="text-gray-600 dark:text-gray-400 text-right">{value}</dd>
+                        </div>
+                    ))}
+                </dl>
+              </div>
+
+              <div className="border-t dark:border-gray-700 pt-6 mt-6">
                   <h3 className="text-xl font-semibold text-brand-blue dark:text-gray-200 mb-4">Common Applications</h3>
                   <div className="space-y-3 text-gray-700 dark:text-gray-300">
                       <div className="flex flex-wrap gap-2">
@@ -111,10 +128,14 @@ const ProductDetailPage: React.FC = () => {
                   </div>
               </div>
               
-              <div className="mt-auto pt-8">
-                <Button onClick={() => setShowInquiry(true)} className="w-full text-lg">
+              <div className="mt-auto pt-8 flex flex-col sm:flex-row gap-4">
+                <Button onClick={() => setShowInquiry(true)} className={buttonCommonClasses}>
                   Request a Quote
                 </Button>
+                <a href={product.specSheetUrl} download className={`${buttonBaseClasses} ${buttonOutlineClasses} ${buttonCommonClasses}`}>
+                    <DownloadIcon className="w-5 h-5" />
+                    Download Spec Sheet
+                </a>
               </div>
             </div>
           </div>

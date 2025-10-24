@@ -14,6 +14,8 @@ export interface Product {
   category: string;
   applications: string[];
   materials: string[];
+  specifications: { [key: string]: string };
+  specSheetUrl: string;
 }
 
 export interface BlogPost {
@@ -25,6 +27,8 @@ export interface BlogPost {
   imageUrl: string;
   author: string;
   publishDate: string;
+  metaDescription: string;
+  metaKeywords: string[];
 }
 
 export interface NavLink {
