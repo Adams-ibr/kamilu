@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import { PRODUCTS, BLOG_POSTS, SERVICES, TESTIMONIALS, TEAM_MEMBERS } from '../constants';
 import type { Product, BlogPost, Service, Testimonial, TeamMember, Submission } from '../types';
 
@@ -38,7 +37,28 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [products, setProducts] = React.useState<Product[]>(PRODUCTS);
     const [blogPosts, setBlogPosts] = React.useState<BlogPost[]>(BLOG_POSTS);
     const [services, setServices] = React.useState<Service[]>(SERVICES);
-    const [submissions, setSubmissions] = React.useState<Submission[]>([]);
+    const [submissions, setSubmissions] = React.useState<Submission[]>(() => {
+        try {
+            const stored = localStorage.getItem('kws-submissions');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Convert timestamp strings back to Date objects
+                return parsed.map((sub: Submission) => ({ ...sub, timestamp: new Date(sub.timestamp) }));
+            }
+            return [];
+        } catch (error) {
+            console.error("Failed to load submissions from local storage:", error);
+            return [];
+        }
+    });
+
+    React.useEffect(() => {
+        try {
+            localStorage.setItem('kws-submissions', JSON.stringify(submissions));
+        } catch (error) {
+            console.error("Failed to save submissions to local storage:", error);
+        }
+    }, [submissions]);
 
     // Non-editable data for now
     const testimonials = TESTIMONIALS;

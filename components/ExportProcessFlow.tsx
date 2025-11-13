@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 // FIX: Replaced non-existent SourcingIcon and QualityIcon with existing OnSiteIcon and StructuralIcon respectively to resolve import errors.
 import { OnSiteIcon, StructuralIcon, ProcessingIcon, DocumentationIcon, ShipmentIcon, SupportIcon, ConsultationIcon } from './icons';

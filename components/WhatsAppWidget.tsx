@@ -1,7 +1,4 @@
-
-
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 
 const WhatsAppWidget: React.FC = () => {
   return (

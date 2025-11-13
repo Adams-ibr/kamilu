@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 
 const iconClass = "h-12 w-12 text-brand-gold";
 const themeIconClass = "w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-brand-gold dark:group-hover:text-brand-gold transition-colors";

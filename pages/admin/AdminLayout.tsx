@@ -1,7 +1,7 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AdminHeader from '../../components/admin/AdminHeader';
+import AdminBreadcrumbs from '../../components/admin/AdminBreadcrumbs';
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -13,6 +13,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <AdminHeader setSidebarOpen={setSidebarOpen} />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900">
           <div className="container mx-auto px-6 py-8">
+            <AdminBreadcrumbs />
             {children}
           </div>
         </main>

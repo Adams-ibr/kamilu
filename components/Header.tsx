@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_LINKS } from '../constants';
 import { motion, AnimatePresence } from 'framer-motion';

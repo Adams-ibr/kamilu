@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import type { Product, BlogPost, NavLink, Stat, Service, Testimonial, TeamMember } from './types';
 import { FabricationIcon, StructuralIcon, OnSiteIcon, PipeIcon, SupportIcon, ConsultationIcon } from './components/icons';
 

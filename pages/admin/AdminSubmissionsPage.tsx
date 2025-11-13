@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import { useAdmin } from '../../contexts/AdminContext';
 import type { Submission } from '../../types';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -130,13 +129,13 @@ const AdminSubmissionsPage: React.FC = () => {
                                 {selectedSubmission.preferredTime && <p><strong>Preferred Time:</strong> {selectedSubmission.preferredTime}</p>}
 
                                 {selectedSubmission.message && (
-                                  <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
-                                      <p className="font-semibold">Message:</p>
-                                      <p className="whitespace-pre-wrap">{selectedSubmission.message}</p>
-                                  </div>
+                                    <div className="mt-4 pt-4 border-t dark:border-gray-700">
+                                        <p><strong>Message:</strong></p>
+                                        <p className="whitespace-pre-wrap">{selectedSubmission.message}</p>
+                                    </div>
                                 )}
                             </div>
-                            <div className="flex justify-end mt-6">
+                            <div className="mt-6 flex justify-end">
                                 <Button variant="outline" onClick={() => setSelectedSubmission(null)}>Close</Button>
                             </div>
                         </motion.div>

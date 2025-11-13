@@ -1,5 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-import * as React from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAdmin } from '../contexts/AdminContext';
 import AnimatedPage from '../components/AnimatedPage';

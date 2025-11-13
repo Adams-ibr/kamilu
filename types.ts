@@ -1,8 +1,4 @@
-// FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
-// The default import `import React from 'react'` was causing TypeScript's global
-// JSX.IntrinsicElements to be overwritten, removing standard HTML element types.
-// Changing to `import * as React from 'react'` ensures correct module augmentation.
-import * as React from 'react';
+import React from 'react';
 
 export interface Product {
   id: number;

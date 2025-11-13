@@ -1,20 +1,28 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Breadcrumbs: React.FC = () => {
+const AdminBreadcrumbs: React.FC = () => {
     const location = useLocation();
-    const pathnames = location.pathname.split('/').filter((x) => x);
+    // Filter out 'admin' and any empty strings from the split
+    const pathnames = location.pathname.split('/').filter((x) => x && x !== 'admin');
+
+    // Function to capitalize the first letter of a string
+    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
     return (
-        <nav aria-label="Breadcrumb" className="py-4">
+        <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center space-x-2 text-sm">
                 <li>
-                    <Link to="/" className="text-gray-500 hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-gold">Home</Link>
+                    <Link to="/admin/dashboard" className="text-gray-500 hover:text-brand-blue dark:text-gray-400 dark:hover:text-brand-gold">
+                        Dashboard
+                    </Link>
                 </li>
                 {pathnames.map((value, index) => {
-                    const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+                    // Create the full path for the link
+                    const to = `/admin/${pathnames.slice(0, index + 1).join('/')}`;
                     const isLast = index === pathnames.length - 1;
-                    const name = value.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    const name = capitalize(value.replace(/-/g, ' '));
 
                     return (
                         <li key={to} className="flex items-center">
@@ -32,4 +40,4 @@ const Breadcrumbs: React.FC = () => {
     );
 };
 
-export default Breadcrumbs;
+export default AdminBreadcrumbs;
