@@ -70,12 +70,18 @@ const ServicesPage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-brand-blue dark:text-gray-100 mb-2">{service.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">{service.description}</p>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 flex-grow">{service.description}</p>
                   </div>
                 </div>
-                <div className="mt-auto text-right">
+                <div className="mt-auto pt-6 flex justify-between items-center">
                     <Link to={`/services/${service.slug}`} className="text-brand-gold font-semibold hover:underline">
                         Learn More &rarr;
+                    </Link>
+                    <Link 
+                        to="/contact" 
+                        className="bg-brand-gold text-white font-bold py-2 px-4 rounded-md text-sm hover:bg-yellow-600 transition-colors"
+                    >
+                        Request a Quote
                     </Link>
                 </div>
               </motion.div>

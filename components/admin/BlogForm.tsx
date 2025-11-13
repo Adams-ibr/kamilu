@@ -6,7 +6,6 @@ import { Textarea } from '../ui/Textarea';
 import { Label } from '../ui/Label';
 import type { BlogPost } from '../../types';
 import { useAdmin } from '../../contexts/AdminContext';
-import RichTextEditor from './RichTextEditor';
 import SERPPreview from './SERPPreview';
 
 interface BlogFormProps {
@@ -67,10 +66,6 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onClose }) => {
         }
     };
 
-    const handleContentChange = React.useCallback((content: string) => {
-        setFormData(prev => ({...prev, content}));
-    }, []);
-
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const base64 = await fileToBase64(e.target.files[0]);
@@ -123,10 +118,13 @@ const BlogForm: React.FC<BlogFormProps> = ({ post, onClose }) => {
                         </div>
                         <div>
                             <Label htmlFor="content">Content</Label>
-                            <RichTextEditor
-                                key={post?.id || 'new-post'}
+                            <Textarea
+                                id="content"
+                                name="content"
                                 value={formData.content}
-                                onEditorChange={handleContentChange}
+                                onChange={handleChange}
+                                rows={10}
+                                required
                             />
                         </div>
                         <div>
