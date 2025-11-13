@@ -14,6 +14,7 @@ const navLinks = [
   { name: 'Blog Posts', path: '/admin/blogs' },
   { name: 'Services', path: '/admin/services' },
   { name: 'Submissions', path: '/admin/submissions' },
+  { name: 'Testimonials', path: '/admin/testimonials' },
 ];
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {

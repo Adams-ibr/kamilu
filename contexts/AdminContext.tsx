@@ -1,31 +1,6 @@
 import React from 'react';
 import { PRODUCTS, BLOG_POSTS, SERVICES, TESTIMONIALS, TEAM_MEMBERS } from '../constants';
-import type { Product, BlogPost, Service, Testimonial, TeamMember, Submission } from '../types';
-
-interface AdminContextType {
-  isAuthenticated: boolean;
-  login: (password: string) => boolean;
-  logout: () => void;
-  
-  products: Product[];
-  addProduct: (product: Omit<Product, 'id' | 'slug'>) => void;
-  updateProduct: (product: Product) => void;
-  deleteProduct: (id: number) => void;
-  
-  blogPosts: BlogPost[];
-  addBlogPost: (post: Omit<BlogPost, 'id' | 'slug'>) => void;
-  updateBlogPost: (post: BlogPost) => void;
-  deleteBlogPost: (id: number) => void;
-
-  services: Service[];
-  updateService: (service: Service) => void;
-  
-  submissions: Submission[];
-  addSubmission: (submission: Omit<Submission, 'id' | 'timestamp'>) => void;
-  
-  testimonials: Testimonial[];
-  teamMembers: TeamMember[];
-}
+import type { Product, BlogPost, Service, Testimonial, TeamMember, Submission, AdminContextType } from '../types';
 
 const AdminContext = React.createContext<AdminContextType | undefined>(undefined);
 
@@ -37,6 +12,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [products, setProducts] = React.useState<Product[]>(PRODUCTS);
     const [blogPosts, setBlogPosts] = React.useState<BlogPost[]>(BLOG_POSTS);
     const [services, setServices] = React.useState<Service[]>(SERVICES);
+    const [testimonials, setTestimonials] = React.useState<Testimonial[]>(TESTIMONIALS);
+
     const [submissions, setSubmissions] = React.useState<Submission[]>(() => {
         try {
             const stored = localStorage.getItem('kws-submissions');
@@ -61,7 +38,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }, [submissions]);
 
     // Non-editable data for now
-    const testimonials = TESTIMONIALS;
     const teamMembers = TEAM_MEMBERS;
 
     const login = (password: string) => {
@@ -123,13 +99,31 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setSubmissions(prev => [newSubmission, ...prev]);
     };
 
+    // Testimonial CRUD
+    const addTestimonial = (testimonialData: Omit<Testimonial, 'id'>) => {
+        const newTestimonial: Testimonial = {
+            ...testimonialData,
+            id: Date.now(),
+        };
+        setTestimonials(prev => [newTestimonial, ...prev]);
+    };
+
+    const updateTestimonial = (updatedTestimonial: Testimonial) => {
+        setTestimonials(prev => prev.map(t => t.id === updatedTestimonial.id ? updatedTestimonial : t));
+    };
+
+    const deleteTestimonial = (id: number) => {
+        setTestimonials(prev => prev.filter(t => t.id !== id));
+    };
+
     const value = {
         isAuthenticated, login, logout,
         products, addProduct, updateProduct, deleteProduct,
         blogPosts, addBlogPost, updateBlogPost, deleteBlogPost,
         services, updateService,
         submissions, addSubmission,
-        testimonials, teamMembers,
+        testimonials, addTestimonial, updateTestimonial, deleteTestimonial,
+        teamMembers,
     };
 
     return (

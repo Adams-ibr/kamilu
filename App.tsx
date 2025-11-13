@@ -25,6 +25,7 @@ import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminBlogsPage from './pages/admin/AdminBlogsPage';
 import AdminServicesPage from './pages/admin/AdminServicesPage';
 import AdminSubmissionsPage from './pages/admin/AdminSubmissionsPage';
+import AdminTestimonialsPage from './pages/admin/AdminTestimonialsPage';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -61,6 +62,7 @@ const AppRoutes = () => {
                                 <Route path="blogs" element={<AdminBlogsPage />} />
                                 <Route path="services" element={<AdminServicesPage />} />
                                 <Route path="submissions" element={<AdminSubmissionsPage />} />
+                                <Route path="testimonials" element={<AdminTestimonialsPage />} />
                                 <Route index element={<Navigate to="dashboard" />} />
                             </Routes>
                         </AdminLayout>

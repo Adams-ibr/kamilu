@@ -78,3 +78,32 @@ export interface Submission {
   preferredTime?: string;
   timestamp: Date;
 }
+
+export interface AdminContextType {
+  isAuthenticated: boolean;
+  login: (password: string) => boolean;
+  logout: () => void;
+  
+  products: Product[];
+  addProduct: (product: Omit<Product, 'id' | 'slug'>) => void;
+  updateProduct: (product: Product) => void;
+  deleteProduct: (id: number) => void;
+  
+  blogPosts: BlogPost[];
+  addBlogPost: (post: Omit<BlogPost, 'id' | 'slug'>) => void;
+  updateBlogPost: (post: BlogPost) => void;
+  deleteBlogPost: (id: number) => void;
+
+  services: Service[];
+  updateService: (service: Service) => void;
+  
+  submissions: Submission[];
+  addSubmission: (submission: Omit<Submission, 'id' | 'timestamp'>) => void;
+  
+  testimonials: Testimonial[];
+  addTestimonial: (testimonial: Omit<Testimonial, 'id'>) => void;
+  updateTestimonial: (testimonial: Testimonial) => void;
+  deleteTestimonial: (id: number) => void;
+
+  teamMembers: TeamMember[];
+}
