@@ -10,6 +10,7 @@ import AboutPage from './pages/AboutPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ServicesPage from './pages/ServicesPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
@@ -92,6 +93,7 @@ const AppRoutes = () => {
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/products/:slug" element={<ProductDetailPage />} />
                     <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/services/:slug" element={<ServiceDetailPage />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/contact" element={<ContactPage />} />

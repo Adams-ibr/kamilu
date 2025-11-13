@@ -4,11 +4,19 @@ import { useAdmin } from '../../contexts/AdminContext';
 import type { Product } from '../../types';
 import { Button } from '../../components/ui/Button';
 import ProductForm from '../../components/admin/ProductForm';
+import TableSkeleton from '../../components/admin/TableSkeleton';
 
 const AdminProductsPage: React.FC = () => {
     const { products, deleteProduct } = useAdmin();
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [editingProduct, setEditingProduct] = React.useState<Product | null>(null);
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        // Simulate network delay for fetching data
+        const timer = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleAddNew = () => {
         setEditingProduct(null);
@@ -33,29 +41,34 @@ const AdminProductsPage: React.FC = () => {
                 <Button onClick={handleAddNew}>Add New Product</Button>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
-                <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">Name</th>
-                            <th scope="col" className="px-6 py-3">Category</th>
-                            <th scope="col" className="px-6 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{product.name}</td>
-                                <td className="px-6 py-4">{product.category}</td>
-                                <td className="px-6 py-4 flex space-x-2">
-                                    <button onClick={() => handleEdit(product)} className="font-medium text-brand-blue dark:text-blue-500 hover:underline">Edit</button>
-                                    <button onClick={() => handleDelete(product.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
-                                </td>
+            {loading ? (
+                <TableSkeleton headers={['Name', 'Category', 'Actions']} />
+            ) : (
+                <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
+                    <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">Name</th>
+                                <th scope="col" className="px-6 py-3">Category</th>
+                                <th scope="col" className="px-6 py-3">Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr key={product.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{product.name}</td>
+                                    <td className="px-6 py-4">{product.category}</td>
+                                    <td className="px-6 py-4 flex space-x-2">
+                                        <button onClick={() => handleEdit(product)} className="font-medium text-brand-blue dark:text-blue-500 hover:underline">Edit</button>
+                                        <button onClick={() => handleDelete(product.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
 
             {isModalOpen && (
                 <ProductForm

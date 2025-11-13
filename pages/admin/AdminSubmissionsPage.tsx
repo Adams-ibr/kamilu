@@ -31,17 +31,19 @@ const AdminSubmissionsPage: React.FC = () => {
         doc.setFontSize(18);
         doc.text("Form Submissions - Kamilu Welding Services", 14, 22);
         
-        const tableColumn = ["Date", "From", "Email", "Type", "Subject / Product", "Message"];
+        const tableColumn = ["Date", "From", "Email", "Phone", "Type", "Topic", "Preferred Time", "Message"];
         const tableRows: (string | null | undefined)[][] = [];
 
         submissions.forEach(sub => {
             const submissionData = [
                 new Date(sub.timestamp).toLocaleString(),
                 sub.name,
-                sub.email,
+                sub.email || '-',
+                sub.phone || '-',
                 sub.type,
-                sub.subject || sub.productName,
-                sub.message
+                sub.subject || sub.productName || 'Callback Request',
+                sub.preferredTime || '-',
+                sub.message || '-',
             ];
             tableRows.push(submissionData);
         });
@@ -54,7 +56,7 @@ const AdminSubmissionsPage: React.FC = () => {
             styles: { fontSize: 8 },
             headStyles: { fillColor: [27, 59, 111] }, // brand-blue
             columnStyles: {
-                5: { cellWidth: 'auto' }, // Message column
+                7: { cellWidth: 'auto' }, // Message column
             }
         });
 
@@ -78,9 +80,9 @@ const AdminSubmissionsPage: React.FC = () => {
                         <tr>
                             <th scope="col" className="px-6 py-3">Date</th>
                             <th scope="col" className="px-6 py-3">From</th>
-                            <th scope="col" className="px-6 py-3">Email</th>
+                            <th scope="col" className="px-6 py-3">Contact Info</th>
                             <th scope="col" className="px-6 py-3">Type</th>
-                            <th scope="col" className="px-6 py-3">Subject / Product</th>
+                            <th scope="col" className="px-6 py-3">Topic</th>
                             <th scope="col" className="px-6 py-3">Actions</th>
                         </tr>
                     </thead>
@@ -89,9 +91,9 @@ const AdminSubmissionsPage: React.FC = () => {
                             <tr key={sub.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="px-6 py-4">{new Date(sub.timestamp).toLocaleString()}</td>
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{sub.name}</td>
-                                <td className="px-6 py-4">{sub.email}</td>
+                                <td className="px-6 py-4">{sub.email || sub.phone}</td>
                                 <td className="px-6 py-4">{sub.type}</td>
-                                <td className="px-6 py-4">{sub.subject || sub.productName}</td>
+                                <td className="px-6 py-4">{sub.subject || sub.productName || 'Callback Request'}</td>
                                 <td className="px-6 py-4">
                                     <button onClick={() => setSelectedSubmission(sub)} className="font-medium text-brand-blue dark:text-blue-500 hover:underline">View</button>
                                 </td>
@@ -119,14 +121,20 @@ const AdminSubmissionsPage: React.FC = () => {
                                 Submission Details
                             </h2>
                             <div className="space-y-4 text-gray-700 dark:text-gray-300">
-                                <p><strong>From:</strong> {selectedSubmission.name} ({selectedSubmission.email})</p>
+                                <p><strong>From:</strong> {selectedSubmission.name}</p>
+                                {selectedSubmission.email && <p><strong>Email:</strong> {selectedSubmission.email}</p>}
+                                {selectedSubmission.phone && <p><strong>Phone:</strong> {selectedSubmission.phone}</p>}
                                 <p><strong>Date:</strong> {new Date(selectedSubmission.timestamp).toLocaleString()}</p>
                                 <p><strong>Type:</strong> {selectedSubmission.type}</p>
-                                <p><strong>Subject:</strong> {selectedSubmission.subject || selectedSubmission.productName}</p>
-                                <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
-                                    <p className="font-semibold">Message:</p>
-                                    <p className="whitespace-pre-wrap">{selectedSubmission.message}</p>
-                                </div>
+                                {(selectedSubmission.subject || selectedSubmission.productName) && <p><strong>Subject:</strong> {selectedSubmission.subject || selectedSubmission.productName}</p>}
+                                {selectedSubmission.preferredTime && <p><strong>Preferred Time:</strong> {selectedSubmission.preferredTime}</p>}
+
+                                {selectedSubmission.message && (
+                                  <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
+                                      <p className="font-semibold">Message:</p>
+                                      <p className="whitespace-pre-wrap">{selectedSubmission.message}</p>
+                                  </div>
+                                )}
                             </div>
                             <div className="flex justify-end mt-6">
                                 <Button variant="outline" onClick={() => setSelectedSubmission(null)}>Close</Button>

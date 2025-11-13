@@ -16,6 +16,7 @@ export interface Product {
   materials: string[];
   specifications: { [key: string]: string };
   specSheetUrl: string;
+  views?: number;
 }
 
 export interface BlogPost {
@@ -43,8 +44,12 @@ export interface Stat {
 
 export interface Service {
     id: number;
+    slug: string;
     name: string;
     description: string;
+    detailedDescription: string;
+    imageUrl: string;
+    features: string[];
     icon: React.ReactNode;
 }
 
@@ -67,11 +72,13 @@ export interface TeamMember {
 
 export interface Submission {
   id: string;
-  type: 'Contact' | 'Inquiry';
+  type: 'Contact' | 'Inquiry' | 'Callback';
   name: string;
-  email: string;
+  email?: string;
   subject?: string;
-  message: string;
+  message?: string;
   productName?: string;
+  phone?: string;
+  preferredTime?: string;
   timestamp: Date;
 }

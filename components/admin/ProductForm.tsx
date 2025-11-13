@@ -7,6 +7,7 @@ import { Textarea } from '../ui/Textarea';
 import { Label } from '../ui/Label';
 import type { Product } from '../../types';
 import { useAdmin } from '../../contexts/AdminContext';
+import { PlusIcon } from '../icons';
 
 interface ProductFormProps {
   product: Product | null;
@@ -144,21 +145,42 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onClose }) => {
                             <Input id="category" name="category" value={formData.category} onChange={handleChange} required />
                         </div>
                         <div>
-                            <Label htmlFor="imageUrl">Main Image</Label>
-                            {formData.imageUrl && <img src={formData.imageUrl} alt="Main preview" className="w-32 h-32 object-cover rounded-md mb-2" />}
-                            <Input id="imageUrl" name="imageUrl" type="file" onChange={handleImageUpload} accept="image/*" />
+                            <Label>Main Image</Label>
+                            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md dark:border-gray-600">
+                                <div className="space-y-1 text-center">
+                                    {formData.imageUrl ? (
+                                        <img src={formData.imageUrl} alt="Main preview" className="mx-auto h-48 w-auto object-contain rounded-md" />
+                                    ) : (
+                                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    )}
+                                    <div className="flex text-sm text-gray-600 dark:text-gray-400">
+                                        <label htmlFor="imageUrl" className="relative cursor-pointer bg-white rounded-md font-medium text-brand-gold hover:text-yellow-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-gold dark:bg-gray-800 dark:focus-within:ring-offset-gray-800">
+                                            <span>Upload a file</span>
+                                            <input id="imageUrl" name="imageUrl" type="file" className="sr-only" onChange={handleImageUpload} accept="image/*" />
+                                        </label>
+                                        <p className="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <Label htmlFor="gallery">Gallery Images</Label>
-                             <div className="flex flex-wrap gap-2 mb-2">
+                            <Label>Gallery Images</Label>
+                            <div className="flex flex-wrap gap-2">
                                 {formData.gallery.map((img, index) => (
-                                    <div key={index} className="relative">
+                                    <div key={index} className="relative group">
                                         <img src={img} alt={`Gallery item ${index + 1}`} className="w-24 h-24 object-cover rounded-md" />
-                                        <button type="button" onClick={() => removeGalleryImage(index)} className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none">&times;</button>
+                                        <button type="button" onClick={() => removeGalleryImage(index)} className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm leading-none opacity-0 group-hover:opacity-100 transition-opacity">&times;</button>
                                     </div>
                                 ))}
+                                <label htmlFor="gallery" className="w-24 h-24 flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-brand-gold dark:border-gray-600 dark:hover:border-brand-gold">
+                                    <PlusIcon className="h-8 w-8 text-gray-400" />
+                                    <span className="mt-1 block text-xs text-gray-500">Add</span>
+                                    <input id="gallery" name="gallery" type="file" multiple onChange={handleGalleryUpload} accept="image/*" className="sr-only" />
+                                </label>
                             </div>
-                            <Input id="gallery" name="gallery" type="file" multiple onChange={handleGalleryUpload} accept="image/*" />
                         </div>
                         <div>
                             <Label htmlFor="applications">Applications (comma-separated)</Label>

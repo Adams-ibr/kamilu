@@ -8,11 +8,14 @@ import { Input } from '../components/ui/Input';
 import { Textarea } from '../components/ui/Textarea';
 import { Label } from '../components/ui/Label';
 import { useAdmin } from '../contexts/AdminContext';
+import { Select } from '../components/ui/Select';
 
 const ContactPage: React.FC = () => {
   const { addSubmission } = useAdmin();
   const [submitted, setSubmitted] = React.useState(false);
+  const [callbackSubmitted, setCallbackSubmitted] = React.useState(false);
   const formRef = React.useRef<HTMLFormElement>(null);
+  const callbackFormRef = React.useRef<HTMLFormElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,6 +33,23 @@ const ContactPage: React.FC = () => {
         setSubmitted(false);
     }, 3000);
   };
+
+  const handleCallbackSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('callback-name') as string;
+    const phone = formData.get('callback-phone') as string;
+    const preferredTime = formData.get('callback-time') as string;
+
+    addSubmission({ type: 'Callback', name, phone, preferredTime });
+
+    setCallbackSubmitted(true);
+    callbackFormRef.current?.reset();
+    setTimeout(() => {
+        setCallbackSubmitted(false);
+    }, 3000);
+  };
+
 
   return (
     <AnimatedPage>
@@ -68,6 +88,32 @@ const ContactPage: React.FC = () => {
                 {submitted && <p className="mt-4 text-center text-green-600 dark:text-green-400">Message sent successfully!</p>}
               </div>
             </form>
+
+            <div className="mt-16">
+                <SectionTitle>Request a Callback</SectionTitle>
+                <form ref={callbackFormRef} onSubmit={handleCallbackSubmit} className="space-y-6">
+                    <div>
+                        <Label htmlFor="callback-name">Full Name</Label>
+                        <Input id="callback-name" name="callback-name" type="text" placeholder="John Doe" required />
+                    </div>
+                    <div>
+                        <Label htmlFor="callback-phone">Phone Number</Label>
+                        <Input id="callback-phone" name="callback-phone" type="tel" placeholder="+234 800 000 0000" required />
+                    </div>
+                    <div>
+                        <Label htmlFor="callback-time">Preferred Time</Label>
+                        <Select id="callback-time" name="callback-time" required>
+                            <option>Morning (9am-12pm)</option>
+                            <option>Afternoon (12pm-4pm)</option>
+                            <option>Evening (4pm-6pm)</option>
+                        </Select>
+                    </div>
+                    <div className="relative">
+                        <Button type="submit" className="w-full">Request Callback</Button>
+                        {callbackSubmitted && <p className="mt-4 text-center text-green-600 dark:text-green-400">Request sent! We'll call you soon.</p>}
+                    </div>
+                </form>
+            </div>
           </div>
           <div className="space-y-8">
             <SectionTitle>Contact Information</SectionTitle>

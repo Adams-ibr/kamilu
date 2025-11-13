@@ -1,7 +1,7 @@
 // FIX: Using a namespace import for React to solve JSX intrinsic element type errors.
 import * as React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAdmin } from '../contexts/AdminContext';
 import AnimatedPage from '../components/AnimatedPage';
 import AnimatedSection from '../components/AnimatedSection';
@@ -69,8 +69,19 @@ const ProductDetailPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Image Gallery */}
             <div>
-              <div className="w-full rounded-lg shadow-lg mb-4 overflow-hidden">
-                <img src={mainImage} alt={product.name} className="w-full h-96 object-cover transition-transform duration-300 hover:scale-105" />
+              <div className="w-full rounded-lg shadow-lg mb-4 overflow-hidden relative h-96">
+                 <AnimatePresence mode="wait">
+                    <motion.img
+                        key={mainImage}
+                        src={mainImage}
+                        alt={product.name}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                 </AnimatePresence>
               </div>
               <div className="flex flex-wrap gap-2">
                 {[product.imageUrl, ...product.gallery].map((img, idx) => (

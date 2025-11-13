@@ -30,6 +30,7 @@ export const PRODUCTS: Product[] = [
             'Weight': '150 kg'
         },
         specSheetUrl: '/docs/honey-processor-spec-sheet.pdf',
+        views: 125,
     },
     {
         id: 2,
@@ -48,6 +49,7 @@ export const PRODUCTS: Product[] = [
             'Crops': 'Maize, Millet, Sorghum, Beans'
         },
         specSheetUrl: '/docs/multi-crop-thresher-spec-sheet.pdf',
+        views: 250,
     },
     {
         id: 3,
@@ -66,6 +68,7 @@ export const PRODUCTS: Product[] = [
             'System': 'Grinder, Mixer, Pelletizer'
         },
         specSheetUrl: '/docs/animal-feed-mill-spec-sheet.pdf',
+        views: 480,
     },
     {
         id: 4,
@@ -84,6 +87,7 @@ export const PRODUCTS: Product[] = [
             'Efficiency': '> 85%'
         },
         specSheetUrl: '/docs/industrial-boiler-spec-sheet.pdf',
+        views: 95,
     },
     {
         id: 5,
@@ -102,6 +106,7 @@ export const PRODUCTS: Product[] = [
             'Control': 'Digital Thermostat Control'
         },
         specSheetUrl: '/docs/vegetable-dryer-spec-sheet.pdf',
+        views: 310,
     },
     {
         id: 6,
@@ -120,6 +125,7 @@ export const PRODUCTS: Product[] = [
             'Panel Thickness': '100mm / 150mm'
         },
         specSheetUrl: '/docs/cold-room-spec-sheet.pdf',
+        views: 180,
     },
 ];
 
@@ -178,10 +184,86 @@ export const STATS: Stat[] = [
 ];
 
 export const SERVICES: Service[] = [
-    { id: 1, name: 'Industrial & Pharmaceutical Machinery', description: 'Design, fabrication, and installation of custom machinery for industrial and pharmaceutical applications, adhering to strict quality standards.', icon: <FabricationIcon /> },
-    { id: 2, name: 'Agro & Food Processing Solutions', description: 'We build a wide range of agro-allied equipment, from threshers and dryers to complete feed mill systems, to boost agricultural productivity.', icon: <StructuralIcon /> },
-    { id: 3, name: 'Cold Room & Chiller Construction', description: 'Complete design and installation of branded cold rooms and industrial chillers for reliable preservation of perishable goods.', icon: <OnSiteIcon /> },
-    { id: 4, name: 'Youth Skills Acquisition Training', description: 'In partnership with government bodies, we provide hands-on training in welding and fabrication to empower the next generation of artisans.', icon: <SupportIcon /> },
+    { 
+        id: 1, 
+        slug: 'industrial-pharmaceutical-machinery',
+        name: 'Industrial & Pharmaceutical Machinery', 
+        description: 'Design, fabrication, and installation of custom machinery for industrial and pharmaceutical applications, adhering to strict quality standards.',
+        detailedDescription: `
+            <p>Our core expertise lies in the bespoke fabrication of machinery for demanding industrial and pharmaceutical environments. We understand that precision, hygiene, and reliability are non-negotiable. Our team works with high-grade materials like 304 and 316 stainless steel to create equipment that meets and exceeds industry regulations.</p>
+            <h3>Our Process Includes:</h3>
+            <ul>
+                <li><strong>Needs Assessment:</strong> We collaborate with you to understand your exact processing requirements, throughput, and operational constraints.</li>
+                <li><strong>CAD Design & Modeling:</strong> We create detailed 3D models to visualize the final product and ensure perfect integration into your existing workflow.</li>
+                <li><strong>Precision Fabrication:</strong> Utilizing modern tools, we cut, form, and assemble components with meticulous attention to detail.</li>
+                <li><strong>Sanitary Welding:</strong> Our certified welders specialize in sanitary TIG welding, creating smooth, non-porous seams that prevent contamination and are easy to clean.</li>
+                <li><strong>FAT (Factory Acceptance Testing):</strong> Before delivery, we can conduct rigorous testing at our facility to ensure the machine operates as specified.</li>
+            </ul>
+        `,
+        imageUrl: 'https://picsum.photos/seed/pharma-machinery/1200/800',
+        features: ['Adherence to GMP Standards', 'High-Grade Stainless Steel Construction', 'Customizable to any Specification', 'Full Documentation and Support', 'On-site Installation and Commissioning'],
+        icon: <FabricationIcon /> 
+    },
+    { 
+        id: 2, 
+        slug: 'agro-food-processing-solutions',
+        name: 'Agro & Food Processing Solutions', 
+        description: 'We build a wide range of agro-allied equipment, from threshers and dryers to complete feed mill systems, to boost agricultural productivity.',
+        detailedDescription: `
+            <p>We are dedicated to mechanizing Nigeria's agricultural sector with robust, efficient, and locally-built machinery. Our solutions are designed to reduce post-harvest losses, increase processing efficiency, and add value to raw agricultural products.</p>
+            <h3>Equipment Showcase:</h3>
+            <ul>
+                <li><strong>Multi-Crop Threshers:</strong> Drastically reduce the time and labor required for threshing crops like maize, sorghum, and millet.</li>
+                <li><strong>Vegetable & Fruit Dryers:</strong> Preserve produce and create new revenue streams with our controlled-environment dehydration systems.</li>
+                <li><strong>Complete Feed Mills:</strong> We design and install end-to-end systems for producing high-quality animal and fish feed, from grinding and mixing to pelletizing.</li>
+                <li><strong>Stainless Steel Processors:</strong> For honey, juices, and other liquid food products, our hygienic processors ensure quality and safety.</li>
+            </ul>
+            <p>Our designs are tailored to the Nigerian context, prioritizing durability, ease of maintenance, and the ability to handle local crop varieties.</p>
+        `,
+        imageUrl: 'https://picsum.photos/seed/agro-processing/1200/800',
+        features: ['Durable and Robust Construction', 'Designed for Local Conditions', 'High-Efficiency Operation', 'Reduces Labor Costs', 'Increases Product Value'],
+        icon: <StructuralIcon /> 
+    },
+    { 
+        id: 3, 
+        slug: 'cold-room-chiller-construction',
+        name: 'Cold Room & Chiller Construction', 
+        description: 'Complete design and installation of branded cold rooms and industrial chillers for reliable preservation of perishable goods.',
+        detailedDescription: `
+            <p>A reliable cold chain is essential for the food, pharmaceutical, and hospitality industries. We provide turnkey solutions for cold storage, from small walk-in chillers to large-scale industrial cold rooms.</p>
+            <h3>Our Cold Chain Services:</h3>
+            <ul>
+                <li><strong>Custom Design:</strong> We design cold rooms based on your specific size requirements, temperature needs (-20°C to +10°C), and product type.</li>
+                <li><strong>High-Quality Insulation:</strong> We use high-density Polyurethane (PUF) panels to ensure maximum thermal efficiency and reduce energy consumption.</li>
+                <li><strong>Reliable Refrigeration Units:</strong> We source and install industry-leading compressors and evaporators from trusted brands like Copeland and Bitzer to guarantee consistent temperatures.</li>
+                <li><strong>Professional Installation:</strong> Our experienced technicians handle the complete assembly, from paneling and flooring to refrigeration system setup and electrical work.</li>
+                <li><strong>Maintenance and Support:</strong> We offer service contracts to ensure your cold room operates at peak performance year-round.</li>
+            </ul>
+        `,
+        imageUrl: 'https://picsum.photos/seed/cold-chain/1200/800',
+        features: ['Customizable Dimensions', 'Wide Temperature Range', 'Energy Efficient Design', 'Top-Tier Refrigeration Components', 'Full Installation & Support'],
+        icon: <OnSiteIcon /> 
+    },
+    { 
+        id: 4, 
+        slug: 'youth-skills-acquisition-training',
+        name: 'Youth Skills Acquisition Training', 
+        description: 'In partnership with government bodies, we provide hands-on training in welding and fabrication to empower the next generation of artisans.',
+        detailedDescription: `
+            <p>Beyond our commercial services, we are deeply committed to building human capital. Our Youth Skills Acquisition program is a cornerstone of our corporate social responsibility, aimed at tackling unemployment and bridging the skills gap in Nigeria's industrial sector.</p>
+            <h3>Program Highlights:</h3>
+            <ul>
+                <li><strong>Government Partnership:</strong> We proudly collaborate with the National Board for Technology Incubation (NBTI) to deliver certified training programs.</li>
+                <li><strong>Practical, Hands-On Learning:</strong> Trainees work on real-world projects in our fully-equipped workshop, learning by doing.</li>
+                <li><strong>Comprehensive Curriculum:</strong> The program covers welding safety, different welding techniques (Arc, TIG, MIG), metal fabrication, blueprint reading, and machine operation.</li>
+                <li><strong>Entrepreneurship Focus:</strong> We don't just teach technical skills; we mentor trainees on how to start and run their own small fabrication businesses.</li>
+                <li><strong>Proven Success:</strong> Many of our graduates have gone on to secure jobs in the industry or launch their own successful enterprises.</li>
+            </ul>
+        `,
+        imageUrl: 'https://picsum.photos/seed/skill-training/1200/800',
+        features: ['NBTI Certified Program', 'Real-World Workshop Experience', 'Expert Instructors', 'Focus on Safety and Quality', 'Pathways to Employment and Entrepreneurship'],
+        icon: <SupportIcon /> 
+    },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
