@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
         />
         <div className="relative z-10 text-center px-4">
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-4"
+            className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
             Fabricating Nigeria's Industrial Future
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl max-w-3xl mx-auto mb-8"
+            className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

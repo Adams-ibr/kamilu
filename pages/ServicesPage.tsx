@@ -64,8 +64,8 @@ const ServicesPage: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 300 }}
                 className="bg-white dark:bg-gray-900 p-8 rounded-lg flex flex-col"
               >
-                <div className="flex items-start space-x-6">
-                  <div className="flex-shrink-0">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+                  <div className="flex-shrink-0 mx-auto sm:mx-0 mb-4 sm:mb-0 sm:mr-6">
                     {service.icon}
                   </div>
                   <div>

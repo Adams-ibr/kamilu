@@ -82,20 +82,22 @@ const ProductDetailPage: React.FC = () => {
                     />
                  </AnimatePresence>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {[product.imageUrl, ...product.gallery].map((img, idx) => (
-                  <div 
-                    key={idx}
-                    className={`w-20 h-20 rounded-md cursor-pointer border-2 transition-all overflow-hidden ${mainImage === img ? 'border-brand-gold scale-105' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'}`}
-                    onClick={() => setMainImage(img)}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`${product.name} gallery ${idx + 1}`} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
+              <div className="w-full overflow-x-auto pb-2">
+                <div className="flex flex-nowrap gap-3">
+                  {[product.imageUrl, ...product.gallery].map((img, idx) => (
+                    <div 
+                      key={idx}
+                      className={`flex-shrink-0 w-20 h-20 rounded-md cursor-pointer border-2 transition-all overflow-hidden ${mainImage === img ? 'border-brand-gold scale-105' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'}`}
+                      onClick={() => setMainImage(img)}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`${product.name} gallery ${idx + 1}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

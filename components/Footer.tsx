@@ -35,9 +35,9 @@ const Footer: React.FC = () => {
                     <div>
                         <h4 className="font-semibold text-lg mb-4">Newsletter</h4>
                         <p className="text-gray-400 mb-4">Get industry insights and company news.</p>
-                        <form className="flex">
-                            <input type="email" placeholder="Your email" className="w-full px-4 py-2 text-gray-800 rounded-l-md focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
-                            <button className="bg-brand-gold text-white px-4 py-2 rounded-r-md hover:bg-yellow-600 transition-colors">Subscribe</button>
+                        <form className="flex flex-col sm:flex-row">
+                            <input type="email" placeholder="Your email" className="w-full px-4 py-2 text-gray-800 rounded-md sm:rounded-l-md sm:rounded-r-none focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
+                            <button className="bg-brand-gold text-white px-4 py-2 rounded-md sm:rounded-l-none sm:rounded-r-md mt-2 sm:mt-0 hover:bg-yellow-600 transition-colors">Subscribe</button>
                         </form>
                     </div>
                 </div>

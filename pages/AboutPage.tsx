@@ -97,7 +97,7 @@ const AboutPage: React.FC = () => {
               <motion.div 
                 key={member.name} 
                 variants={itemVariants}
-                className="bg-white rounded-lg p-6 group relative dark:bg-gray-800 dark:border dark:border-gray-700"
+                className="bg-white rounded-lg p-4 sm:p-6 group relative dark:bg-gray-800 dark:border dark:border-gray-700"
                 whileHover={{ 
                   y: -5, 
                   scale: 1.02, 
